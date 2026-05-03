@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 0 — The Road to Sub-3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Mulish:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F1EBDD;
+    --paper-deep: #E8DFCB;
+    --ink: #1F1B17;
+    --ink-soft: #4A413A;
+    --rule: #C9BDA3;
+    --accent: #9B2D20;
+    --accent-soft: #C25A3D;
+    --moss: #4A5D3A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(155, 45, 32, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(74, 93, 58, 0.04) 0%, transparent 40%);
+    color: var(--ink);
+    font-family: 'Mulish', sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(44px, 8vw, 84px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.4vw, 22px);
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin-top: 12px;
+    font-weight: 400;
+  }
+
+  /* ---- STATS BAR ---- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink);
+    margin-bottom: 56px;
+    background: var(--paper-deep);
+  }
+
+  .stat {
+    padding: 20px 18px;
+    border-right: 1px solid var(--rule);
+    text-align: left;
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .stat-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(20px, 3vw, 28px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .stat-value small {
+    font-size: 12px;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-left: 4px;
+  }
+
+  /* ---- SECTIONS ---- */
+  section {
+    margin-bottom: 64px;
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  h2 em { font-style: italic; color: var(--accent); }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--ink-soft);
+  }
+
+  p.lead {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.5;
+    max-width: 680px;
+    margin-bottom: 28px;
+  }
+
+  /* ---- WEEKLY SCHEDULE ---- */
+  .week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .day {
+    padding: 16px 12px 18px;
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+  }
+
+  .day:hover { transform: translateY(-2px); }
+
+  .day-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+
+  .day-type {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .day-detail {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    margin-top: auto;
+  }
+
+  .day.work {
+    background: #FFF8E8;
+    border-color: var(--accent-soft);
+  }
+
+  .day.lift {
+    background: #EFE8D8;
+    border-color: var(--moss);
+  }
+
+  .day.work .day-type { color: var(--accent); }
+  .day.lift .day-type { color: var(--moss); }
+
+  @media (max-width: 720px) {
+    .week { grid-template-columns: repeat(2, 1fr); }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--rule); }
+  }
+
+  /* ---- PACE ZONES ---- */
+  .paces {
+    border: 1px solid var(--ink);
+    background: var(--paper-deep);
+    padding: 0;
+    margin-bottom: 32px;
+  }
+
+  .pace-row {
+    display: grid;
+    grid-template-columns: 180px 140px 1fr;
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 18px;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pace-row:last-child { border-bottom: none; }
+
+  .pace-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .pace-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .pace-feel {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  @media (max-width: 720px) {
+    .pace-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .pace-feel { grid-column: 1 / -1; margin-top: 4px; }
+  }
+
+  /* ---- RUN CARDS ---- */
+  .run-card {
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    background: var(--paper-deep);
+    margin-bottom: 16px;
+  }
+
+  .run-card.easy { border-left-color: var(--moss); }
+
+  .run-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .run-card h3 { margin-bottom: 12px; }
+
+  .run-card ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 12px;
+  }
+
+  .run-card li {
+    padding: 6px 0;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    border-bottom: 1px dotted var(--rule);
+  }
+
+  .run-card li:last-child { border-bottom: none; }
+
+  .run-card li strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 8px;
+  }
+
+  /* ---- STRENGTH ---- */
+  .lift-session {
+    background: var(--paper-deep);
+    border: 1px solid var(--ink);
+    padding: 28px 28px 24px;
+    margin-bottom: 24px;
+  }
+
+  .lift-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .lift-header h3 {
+    font-size: 26px;
+    margin-bottom: 0;
+  }
+
+  .lift-day {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    background: var(--paper);
+    padding: 4px 10px;
+    border: 1px solid var(--accent);
+  }
+
+  .exercise {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .exercise:last-child { border-bottom: none; }
+
+  .ex-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .ex-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+
+  .ex-prescription {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .ex-notes {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  .ex-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .ex-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  .ex-link::after { content: " →"; }
+
+  /* ---- MAINTENANCE ---- */
+  .maint-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 720px) {
+    .maint-grid { grid-template-columns: 1fr; }
+  }
+
+  .maint-card {
+    border: 1px solid var(--rule);
+    padding: 22px 24px;
+    background: var(--paper-deep);
+  }
+
+  .maint-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .maint-when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .maint-card ol {
+    padding-left: 18px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .maint-card li {
+    padding: 4px 0;
+  }
+
+  /* ---- MESOCYCLE ---- */
+  .meso {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 720px) {
+    .meso { grid-template-columns: 1fr; }
+  }
+
+  .meso-week {
+    padding: 20px 18px;
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .meso-week.deload {
+    background: #EAE3D0;
+    border-color: var(--moss);
+  }
+
+  .meso-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .meso-week.deload .meso-num { color: var(--moss); }
+
+  .meso-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .meso-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ---- PRINCIPLES ---- */
+  .principles {
+    border-top: 2px solid var(--ink);
+    padding-top: 32px;
+  }
+
+  .principle {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    align-items: baseline;
+  }
+
+  .principle-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .principle-text {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .principle-text small {
+    display: block;
+    font-family: 'Mulish', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Print friendliness */
+  @media print {
+    body { background: white; }
+    .day:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="masthead">
+      <span>Phase 0 · Base Build</span>
+      <span>3 Days Running · 2 Days Lifting</span>
+    </div>
+    <h1>The Road<br>to <em>Sub-Three.</em></h1>
+    <p class="subtitle">A patient, durable training framework — built around one quality run, two easy runs, two strength sessions, and the long view.</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-label">5K PR</span>
+      <span class="stat-value">22:40<small>· 4:32/km</small></span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Half PR</span>
+      <span class="stat-value">1:59:25<small>· 5:39/km</small></span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">BQ Target</span>
+      <span class="stat-value">2:59<small>· 4:15/km</small></span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Phase</span>
+      <span class="stat-value">0<small>· Durability</small></span>
+    </div>
+  </div>
+
+  <!-- ============ WEEK ============ -->
+  <section>
+    <span class="section-tag">§ One — The Week</span>
+    <h2>The shape of a <em>training week.</em></h2>
+    <p class="lead">Quality on Wednesday. Easy on Friday. Long on Sunday. Strength bookends the running so the legs lift fresh on Tuesday and recover into Saturday.</p>
+
+    <div class="week">
+      <div class="day">
+        <span class="day-name">Mon</span>
+        <span class="day-type">Rest</span>
+        <span class="day-detail">Walk, mobility, or nothing at all.</span>
+      </div>
+      <div class="day lift">
+        <span class="day-name">Tue</span>
+        <span class="day-type">Strength A</span>
+        <span class="day-detail">PF-focused. Heavy slow calf raises + single-leg work.</span>
+      </div>
+      <div class="day work">
+        <span class="day-name">Wed</span>
+        <span class="day-type">Quality Run</span>
+        <span class="day-detail">Threshold session. 4–7K total incl. 1K WU.</span>
+      </div>
+      <div class="day">
+        <span class="day-name">Thu</span>
+        <span class="day-type">Rest</span>
+        <span class="day-detail">Real recovery. Light core only if anything.</span>
+      </div>
+      <div class="day lift">
+        <span class="day-name">Fri</span>
+        <span class="day-type">Easy + Strength B</span>
+        <span class="day-detail">5–10K easy run, then general lifting same day.</span>
+      </div>
+      <div class="day">
+        <span class="day-name">Sat</span>
+        <span class="day-type">Rest</span>
+        <span class="day-detail">Non-negotiable. Bridge day before long run.</span>
+      </div>
+      <div class="day work">
+        <span class="day-name">Sun</span>
+        <span class="day-type">Long Run</span>
+        <span class="day-detail">10–20K easy. Conversational the whole way.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PACES ============ -->
+  <section>
+    <span class="section-tag">§ Two — Paces</span>
+    <h2>Run by <em>feel</em>, verified by pace.</h2>
+    <p class="lead">These are the paces that match your current fitness. Heart rate is the truer guide on any given day — let it lead, especially on hot or tired days.</p>
+
+    <div class="paces">
+      <div class="pace-row">
+        <span class="pace-name">Easy</span>
+        <span class="pace-value">5:40 – 6:00 /km</span>
+        <span class="pace-feel">Conversational. Full sentences. Z2.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Long Run</span>
+        <span class="pace-value">5:40 – 6:00 /km</span>
+        <span class="pace-feel">Same as easy. Resist the urge to go faster.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Threshold</span>
+        <span class="pace-value">4:45 – 4:54 /km</span>
+        <span class="pace-feel">Comfortably uncomfortable. Z4. Short phrases only.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">5K Race</span>
+        <span class="pace-value">4:32 /km</span>
+        <span class="pace-feel">Reference point — current PR pace.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Marathon Goal</span>
+        <span class="pace-value">4:15 /km</span>
+        <span class="pace-feel">Future pace. Not used in Phase 0.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE RUNS ============ -->
+  <section>
+    <span class="section-tag">§ Three — The Runs</span>
+    <h2>Three runs, three <em>distinct purposes.</em></h2>
+
+    <div class="run-card">
+      <div class="run-meta">Wednesday · Quality</div>
+      <h3>Threshold Session</h3>
+      <p>Alternate weekly between continuous and cruise intervals. Always 1K easy warm-up first, optional 1K cool-down if time allows.</p>
+      <ul>
+        <li><strong>Format A</strong> Continuous: 1K WU → 20–25 min @ threshold (4:48/km) → done</li>
+        <li><strong>Format B</strong> Cruise: 1K WU → 2 × 12 min @ 4:45/km, 2-min jog between</li>
+        <li><strong>Format C</strong> Cruise: 1K WU → 3 × 8 min @ 4:45/km, 90s jog between</li>
+        <li><strong>Cue</strong> Should feel hard but sustainable. Z4 only. No Z5.</li>
+      </ul>
+    </div>
+
+    <div class="run-card easy">
+      <div class="run-meta">Friday · Aerobic</div>
+      <h3>Easy Run</h3>
+      <p>The most undervalued run of the week. Builds the mitochondrial base that makes threshold pace possible.</p>
+      <ul>
+        <li><strong>Volume</strong> 5–10 km, building gradually within the cycle</li>
+        <li><strong>Pace</strong> 5:40–6:00/km. Slower is fine. Faster is not.</li>
+        <li><strong>HR</strong> Stay in Zone 2. If breathing climbs, slow down.</li>
+        <li><strong>After</strong> Strength Session B, same day</li>
+      </ul>
+    </div>
+
+    <div class="run-card easy">
+      <div class="run-meta">Sunday · Long</div>
+      <h3>Long Run</h3>
+      <p>The single most important running adaptation in Phase 0. Extend by ~1K every 2–3 weeks during build weeks.</p>
+      <ul>
+        <li><strong>Volume</strong> 10–20 km, progressing across the cycle</li>
+        <li><strong>Pace</strong> Conversational throughout. ~5:40–6:00/km.</li>
+        <li><strong>Goal</strong> Time on feet. Don't race it. Don't end it tired.</li>
+        <li><strong>Future</strong> Will progress to 28–32K before marathon-specific work begins</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ STRENGTH A ============ -->
+  <section>
+    <span class="section-tag">§ Four — Strength</span>
+    <h2>Two sessions, <em>different jobs.</em></h2>
+    <p class="lead">Tuesday is for the plantar fascia and the small stabilizers. Friday is for general posterior chain and movement quality. Both end in calf raises, because the foot is the foundation of everything.</p>
+
+    <div class="lift-session">
+      <div class="lift-header">
+        <h3>Session A — Plantar Fascia &amp; Stability</h3>
+        <span class="lift-day">Tuesday</span>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Heavy Slow Calf Raise — Toes Extended <em style="font-style:italic; font-weight:400; color: var(--accent);">★ priority</em></span>
+          <span class="ex-prescription">3 × 12 · every other day</span>
+        </div>
+        <p class="ex-notes">The Rathleff protocol. Stand on a step with a rolled towel under your toes (this is the key — toes must be dorsiflexed). Rise up over 3 seconds, pause 2 seconds at top, lower over 3 seconds. Single leg if possible. Add weight (backpack, then dumbbells) as it gets easier. This is <em>the</em> exercise.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=rathleff+plantar+fasciitis+heavy+slow+calf+raise" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Single-Leg Romanian Deadlift</span>
+          <span class="ex-prescription">3 × 8 each leg</span>
+        </div>
+        <p class="ex-notes">Hinge at the hip on one leg, opposite leg extending behind for balance. Bodyweight first, then add a light dumbbell in the opposite hand. Builds posterior chain and proprioception — every running stride is a unilateral load.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=single+leg+romanian+deadlift+form" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Side-Lying Leg Raise</span>
+          <span class="ex-prescription">3 × 15 each side</span>
+        </div>
+        <p class="ex-notes">Glute medius activation. Lie on your side, lift the top leg slowly, lower under control. Weak hips let the knee collapse inward, which loads the medial foot — upstream cause of PF.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=side+lying+leg+raise+glute+medius+runners" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Single-Leg Balance</span>
+          <span class="ex-prescription">3 × 30 sec each</span>
+        </div>
+        <p class="ex-notes">Stand on one leg, eyes open. Progress to eyes closed when easy, then add a soft surface (folded towel). Trains the small stabilizing muscles of the foot and ankle.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=single+leg+balance+exercise+runners" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+    </div>
+
+    <div class="lift-session">
+      <div class="lift-header">
+        <h3>Session B — General Strength</h3>
+        <span class="lift-day">Friday · post-run</span>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Goblet Squat</span>
+          <span class="ex-prescription">3 × 10</span>
+        </div>
+        <p class="ex-notes">Hold a dumbbell or kettlebell at your chest. Squat to comfortable depth, knees tracking over toes. Builds quads, glutes, and core in a runner-friendly pattern. Start with bodyweight if needed.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=goblet+squat+form+beginner" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Bulgarian Split Squat</span>
+          <span class="ex-prescription">3 × 8 each leg</span>
+        </div>
+        <p class="ex-notes">Rear foot elevated on a bench or step, front foot forward. Lower the back knee toward the floor, drive up through the front foot. The single most translatable strength exercise for distance running.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=bulgarian+split+squat+form" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Heavy Slow Calf Raise (round 2)</span>
+          <span class="ex-prescription">3 × 12</span>
+        </div>
+        <p class="ex-notes">Same as Tuesday — toes extended on a step, 3 sec up, 2 sec pause, 3 sec down. Two sessions per week is the proven cadence for tendon/fascia adaptation.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=rathleff+plantar+fasciitis+heavy+slow+calf+raise" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Banded Lateral Walk</span>
+          <span class="ex-prescription">2 × 15 each direction</span>
+        </div>
+        <p class="ex-notes">Resistance band around ankles or above knees, athletic stance, side-step against the band's resistance. Hits glute med directly. A fatigued, jelly-like burn at the side of the hip is the goal.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=banded+lateral+walk+glute+medius" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Plank</span>
+          <span class="ex-prescription">3 × 45 sec</span>
+        </div>
+        <p class="ex-notes">Forearms on the floor, body in a straight line from heels to head. Don't let the hips sag. Quality over duration — 45 seconds clean beats 90 seconds sloppy.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=forearm+plank+proper+form" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top">
+          <span class="ex-name">Dead Bug</span>
+          <span class="ex-prescription">3 × 10 each side</span>
+        </div>
+        <p class="ex-notes">Lying on your back, lower opposite arm and leg slowly while keeping your low back pressed into the floor. Anti-extension core work — what you actually need as a runner.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=dead+bug+exercise+core" target="_blank" rel="noopener">Watch demonstration</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAINTENANCE ============ -->
+  <section>
+    <span class="section-tag">§ Five — PF Maintenance</span>
+    <h2>Daily care for the <em>fascia.</em></h2>
+    <p class="lead">These take five minutes total, daily. Not training — maintenance. The foot bath is good. These additions make it better.</p>
+
+    <div class="maint-grid">
+      <div class="maint-card">
+        <h4>Morning Routine</h4>
+        <span class="maint-when">Before getting out of bed</span>
+        <ol>
+          <li>10 slow ankle circles each direction (under the covers)</li>
+          <li>10 toe scrunches — curl toes toward sole, release</li>
+          <li>Stand carefully, then your foot bath as planned</li>
+          <li>5 min easy walking before any running pace</li>
+        </ol>
+      </div>
+
+      <div class="maint-card">
+        <h4>Post-Run Routine</h4>
+        <span class="maint-when">Within 30 min of finishing</span>
+        <ol>
+          <li>Frozen water bottle under the foot, 5 min rolling</li>
+          <li>Calf stretch: against the wall, 30 sec each side</li>
+          <li>Soleus stretch: same wall, knee bent, 30 sec each side</li>
+          <li>Hydrate, eat, get on with your day</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MESOCYCLE ============ -->
+  <section>
+    <span class="section-tag">§ Six — The Cycle</span>
+    <h2>Two weeks build, <em>one week back off.</em></h2>
+    <p class="lead">Tendons and fascia adapt slower than muscle. The deload week isn't a rest week — it's the week the tissue actually gets stronger.</p>
+
+    <div class="meso">
+      <div class="meso-week">
+        <div class="meso-num">01</div>
+        <div class="meso-name">Build</div>
+        <div class="meso-desc">Lower end of distance ranges. Easy 5K, long 10K, quality 4K total.</div>
+      </div>
+      <div class="meso-week">
+        <div class="meso-num">02</div>
+        <div class="meso-name">Build</div>
+        <div class="meso-desc">Push toward upper end. Easy 8K, long 15K, quality 5–6K total.</div>
+      </div>
+      <div class="meso-week deload">
+        <div class="meso-num">03</div>
+        <div class="meso-name">Deload</div>
+        <div class="meso-desc">Pull back ~30%. Easy 5K, long 10K, quality kept short and sharp. Strength volume halved.</div>
+      </div>
+    </div>
+    <p>Then repeat — and each new cycle nudges the upper bound a little further than the last. Slowly. Long-run ceiling moves from 20K → 25K → 28K over months, not weeks.</p>
+  </section>
+
+  <!-- ============ PRINCIPLES ============ -->
+  <section class="principles">
+    <span class="section-tag">§ Seven — Hold Onto These</span>
+    <h2>The principles that <em>keep this working.</em></h2>
+
+    <div class="principle">
+      <div class="principle-num">i</div>
+      <div class="principle-text">
+        Easy means easy.
+        <small>If you can't speak in full sentences on Friday or Sunday, you're running too hard. The aerobic base is built at paces that feel almost too slow.</small>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">ii</div>
+      <div class="principle-text">
+        One quality session per week. No more.
+        <small>The threshold run is the engine. Adding a second hard session on three days/week is how runners with PF history get hurt.</small>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">iii</div>
+      <div class="principle-text">
+        Lift fresh, run threshold next day.
+        <small>Tuesday strength → Wednesday quality. Never the other way. Heavy load on fatigued tissue is where injuries live.</small>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">iv</div>
+      <div class="principle-text">
+        Saturday is sacred.
+        <small>Full rest between Friday strength and Sunday long. This single off-day protects the long run more than any extra mileage would build it.</small>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">v</div>
+      <div class="principle-text">
+        Load before complexity.
+        <small>Don't collect new exercises. Add weight to the ones you already do. Bodyweight squat → goblet squat → loaded goblet squat.</small>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">vi</div>
+      <div class="principle-text">
+        Consistency beats heroic.
+        <small>Twelve months of three good runs per week beats six weeks of five before another PF flare. The marathon rewards the patient.</small>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Phase 0 · v1</span>
+    <span>Built for the long view</span>
+  </footer>
+
+</div>
+</body>
+</html>
