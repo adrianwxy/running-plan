@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phase 0 — The Road to Sub-3</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Mulish:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F1EBDD;
@@ -17,6 +14,8 @@
     --accent: #9B2D20;
     --accent-soft: #C25A3D;
     --moss: #4A5D3A;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Consolas, "Liberation Mono", monospace;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,7 +28,7 @@
       radial-gradient(circle at 20% 10%, rgba(155, 45, 32, 0.04) 0%, transparent 40%),
       radial-gradient(circle at 80% 90%, rgba(74, 93, 58, 0.04) 0%, transparent 40%);
     color: var(--ink);
-    font-family: 'Mulish', sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.6;
     font-size: 16px;
     padding: 0;
@@ -53,7 +52,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -64,7 +63,7 @@
   }
 
   h1 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-weight: 900;
     font-size: clamp(44px, 8vw, 84px);
     line-height: 0.92;
@@ -79,11 +78,11 @@
   }
 
   .subtitle {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-style: italic;
     font-size: clamp(18px, 2.4vw, 22px);
     color: var(--ink-soft);
-    max-width: 580px;
+    max-width: 620px;
     margin-top: 12px;
     font-weight: 400;
   }
@@ -107,7 +106,7 @@
   .stat:last-child { border-right: none; }
 
   .stat-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -117,16 +116,16 @@
   }
 
   .stat-value {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-weight: 700;
-    font-size: clamp(20px, 3vw, 28px);
+    font-size: clamp(18px, 2.6vw, 26px);
     line-height: 1;
     letter-spacing: -0.01em;
   }
 
   .stat-value small {
     font-size: 12px;
-    font-family: 'Mulish', sans-serif;
+    font-family: var(--font-sans);
     font-weight: 400;
     color: var(--ink-soft);
     margin-left: 4px;
@@ -138,7 +137,7 @@
   }
 
   .section-tag {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
@@ -148,8 +147,8 @@
   }
 
   h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
+    font-family: var(--font-sans);
+    font-weight: 700;
     font-size: clamp(30px, 5vw, 44px);
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -159,8 +158,8 @@
   h2 em { font-style: italic; color: var(--accent); }
 
   h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
+    font-family: var(--font-sans);
+    font-weight: 700;
     font-size: 22px;
     line-height: 1.2;
     margin-bottom: 8px;
@@ -173,7 +172,7 @@
   }
 
   p.lead {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-size: 19px;
     font-weight: 400;
     color: var(--ink);
@@ -203,7 +202,7 @@
   .day:hover { transform: translateY(-2px); }
 
   .day-name {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -212,8 +211,8 @@
   }
 
   .day-type {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
+    font-family: var(--font-sans);
+    font-weight: 700;
     font-size: 14px;
     line-height: 1.15;
     margin-bottom: 8px;
@@ -236,22 +235,28 @@
     border-color: var(--moss);
   }
 
+  .day.lift-light {
+    background: var(--paper-deep);
+    border-color: rgba(74, 93, 58, 0.4);
+  }
+
   .day.work .day-type { color: var(--accent); }
   .day.lift .day-type { color: var(--moss); }
+  .day.lift-light .day-type { color: var(--moss); opacity: 0.85; }
 
   @media (max-width: 720px) {
     .week { grid-template-columns: repeat(2, 1fr); }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .stat:nth-child(2) { border-right: none; }
-    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--rule); }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--rule); }
+    .stat:last-child { border-bottom: none; }
   }
 
-  /* ---- PACE ZONES ---- */
+  /* ---- PACE / ZONE ZONES ---- */
   .paces {
     border: 1px solid var(--ink);
     background: var(--paper-deep);
     padding: 0;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
 
   .pace-row {
@@ -266,13 +271,13 @@
   .pace-row:last-child { border-bottom: none; }
 
   .pace-name {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
+    font-family: var(--font-sans);
+    font-weight: 700;
     font-size: 16px;
   }
 
   .pace-value {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 15px;
     font-weight: 500;
     color: var(--accent);
@@ -282,6 +287,12 @@
     font-size: 13.5px;
     color: var(--ink-soft);
     font-style: italic;
+  }
+
+  .table-note {
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 32px;
   }
 
   @media (max-width: 720px) {
@@ -303,7 +314,7 @@
   .run-card.easy { border-left-color: var(--moss); }
 
   .run-meta {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -329,7 +340,7 @@
   .run-card li:last-child { border-bottom: none; }
 
   .run-card li strong {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 12px;
     color: var(--ink);
     text-transform: uppercase;
@@ -362,7 +373,7 @@
   }
 
   .lift-day {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -370,6 +381,10 @@
     background: var(--paper);
     padding: 4px 10px;
     border: 1px solid var(--accent);
+  }
+
+  .lift-intro {
+    margin-bottom: 20px;
   }
 
   .exercise {
@@ -389,14 +404,14 @@
   }
 
   .ex-name {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-weight: 600;
     font-size: 17px;
     letter-spacing: -0.01em;
   }
 
   .ex-prescription {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 13px;
     color: var(--accent);
     font-weight: 500;
@@ -412,7 +427,7 @@
   .ex-link {
     display: inline-block;
     margin-top: 8px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -445,14 +460,14 @@
   }
 
   .maint-card h4 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 4px;
   }
 
   .maint-when {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -495,7 +510,7 @@
   }
 
   .meso-num {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-style: italic;
     font-size: 48px;
     font-weight: 400;
@@ -507,8 +522,8 @@
   .meso-week.deload .meso-num { color: var(--moss); }
 
   .meso-name {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
+    font-family: var(--font-sans);
+    font-weight: 700;
     font-size: 16px;
     margin-bottom: 4px;
   }
@@ -529,21 +544,21 @@
     padding: 18px 0;
     border-bottom: 1px solid var(--rule);
     display: grid;
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: 72px 1fr;
     gap: 20px;
     align-items: baseline;
   }
 
   .principle-num {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-style: italic;
-    font-size: 32px;
+    font-size: 30px;
     color: var(--accent);
     line-height: 1;
   }
 
   .principle-text {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-sans);
     font-size: 18px;
     line-height: 1.4;
     color: var(--ink);
@@ -551,7 +566,7 @@
 
   .principle-text small {
     display: block;
-    font-family: 'Mulish', sans-serif;
+    font-family: var(--font-sans);
     font-size: 13.5px;
     color: var(--ink-soft);
     margin-top: 4px;
@@ -567,7 +582,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -589,10 +604,10 @@
   <header>
     <div class="masthead">
       <span>Phase 0 · Base Build</span>
-      <span>3 Days Running · 2 Days Lifting</span>
+      <span>4 Days Running · 2 Days Lifting</span>
     </div>
     <h1>The Road<br>to <em>Sub-Three.</em></h1>
-    <p class="subtitle">A patient, durable training framework — built around one quality run, two easy runs, two strength sessions, and the long view.</p>
+    <p class="subtitle">A patient, durable training framework — two easy runs, one threshold session, one long run with a late surge, and two strength sessions — governed by heart rate first, pace second.</p>
   </header>
 
   <div class="stats">
@@ -605,12 +620,12 @@
       <span class="stat-value">1:59:25<small>· 5:39/km</small></span>
     </div>
     <div class="stat">
-      <span class="stat-label">BQ Target</span>
-      <span class="stat-value">2:59<small>· 4:15/km</small></span>
+      <span class="stat-label">Mile PR</span>
+      <span class="stat-value">6:19<small>· 3:55/km</small></span>
     </div>
     <div class="stat">
-      <span class="stat-label">Phase</span>
-      <span class="stat-value">0<small>· Durability</small></span>
+      <span class="stat-label">BQ Target</span>
+      <span class="stat-value">2:59<small>· 4:15/km</small></span>
     </div>
   </div>
 
@@ -618,73 +633,120 @@
   <section>
     <span class="section-tag">§ One — The Week</span>
     <h2>The shape of a <em>training week.</em></h2>
-    <p class="lead">Quality on Wednesday. Easy on Friday. Long on Sunday. Strength bookends the running so the legs lift fresh on Tuesday and recover into Saturday.</p>
+    <p class="lead">Four running days, two lifting days, three full rest days. Tuesday and Wednesday can swap for weather. Thursday stays light — that's an office day. Sunday into Monday is a deliberate double rest block after the long run.</p>
 
     <div class="week">
-      <div class="day">
-        <span class="day-name">Mon</span>
-        <span class="day-type">Rest</span>
-        <span class="day-detail">Walk, mobility, or nothing at all.</span>
-      </div>
       <div class="day lift">
+        <span class="day-name">Mon</span>
+        <span class="day-type">Strength B</span>
+        <span class="day-detail">General strength, fresh legs. Goblet squats, split squats, core.</span>
+      </div>
+      <div class="day">
         <span class="day-name">Tue</span>
-        <span class="day-type">Strength A</span>
-        <span class="day-detail">PF-focused. Heavy slow calf raises + single-leg work.</span>
+        <span class="day-type">Easy Run</span>
+        <span class="day-detail">Zone 2, conversational. Swaps with Wed if weather calls for it.</span>
       </div>
       <div class="day work">
         <span class="day-name">Wed</span>
-        <span class="day-type">Quality Run</span>
-        <span class="day-detail">Threshold session. 4–7K total incl. 1K WU.</span>
+        <span class="day-type">Threshold</span>
+        <span class="day-detail">WU + threshold + CD. Swaps with Tue if needed.</span>
       </div>
-      <div class="day">
+      <div class="day lift-light">
         <span class="day-name">Thu</span>
-        <span class="day-type">Rest</span>
-        <span class="day-detail">Real recovery. Light core only if anything.</span>
-      </div>
-      <div class="day lift">
-        <span class="day-name">Fri</span>
-        <span class="day-type">Easy + Strength B</span>
-        <span class="day-detail">5–10K easy run, then general lifting same day.</span>
+        <span class="day-type">Strength A · AM</span>
+        <span class="day-detail">PF prehab, ~15–20 min. Light on purpose — office day.</span>
       </div>
       <div class="day">
-        <span class="day-name">Sat</span>
-        <span class="day-type">Rest</span>
-        <span class="day-detail">Non-negotiable. Bridge day before long run.</span>
+        <span class="day-name">Fri</span>
+        <span class="day-type">Easy Run</span>
+        <span class="day-detail">Zone 2, conversational. Same rules as Tuesday.</span>
       </div>
       <div class="day work">
-        <span class="day-name">Sun</span>
+        <span class="day-name">Sat</span>
         <span class="day-type">Long Run</span>
-        <span class="day-detail">10–20K easy. Conversational the whole way.</span>
+        <span class="day-detail">Zone 2 base, then a surge to Zone 3/low-Zone 4 for the close.</span>
+      </div>
+      <div class="day">
+        <span class="day-name">Sun</span>
+        <span class="day-type">Rest</span>
+        <span class="day-detail">Full rest. Long run was yesterday — let it settle.</span>
       </div>
     </div>
   </section>
 
-  <!-- ============ PACES ============ -->
+  <!-- ============ ZONES & PACES ============ -->
   <section>
-    <span class="section-tag">§ Two — Paces</span>
-    <h2>Run by <em>feel</em>, verified by pace.</h2>
-    <p class="lead">These are the paces that match your current fitness. Heart rate is the truer guide on any given day — let it lead, especially on hot or tired days.</p>
+    <span class="section-tag">§ Two — Zones &amp; Paces</span>
+    <h2>Heart rate leads, <em>pace follows.</em></h2>
+    <p class="lead">Zones govern effort now, not the other way around. Every pace below is just what a heart rate target happens to produce right now — track the trend in that number over the coming months, not the number itself.</p>
 
+    <div class="run-card easy">
+      <div class="run-meta">Field Note · What Changed</div>
+      <h3>The "Easy" Pace Was Never Easy</h3>
+      <p style="margin-bottom: 0;">For a long time, "easy" meant 5:40–6:00/km — which turns out to be almost exactly current half-marathon race pace. Every easy day was landing in the gray zone: too hard to actually recover, too easy to count as real quality work. That's a well-documented way distance runners get hurt — the fascia never got a genuinely low-load day to remodel on. Two months into real Zone 2 running, at roughly 7:20/km, with no PF flare-up since. Heart rate leads now. Pace just follows.</p>
+    </div>
+
+    <h3 style="margin-top: 28px;">Heart Rate Zones</h3>
     <div class="paces">
       <div class="pace-row">
-        <span class="pace-name">Easy</span>
-        <span class="pace-value">5:40 – 6:00 /km</span>
-        <span class="pace-feel">Conversational. Full sentences. Z2.</span>
+        <span class="pace-name">Zone 1</span>
+        <span class="pace-value">100 – 120 bpm</span>
+        <span class="pace-feel">Recovery. Rarely prescribed here.</span>
       </div>
       <div class="pace-row">
-        <span class="pace-name">Long Run</span>
+        <span class="pace-name">Zone 2</span>
+        <span class="pace-value">120 – 140 bpm</span>
+        <span class="pace-feel">Full sentences, no strain. Tue, Fri, and the first ~80% of Saturday.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Zone 3</span>
+        <span class="pace-value">140 – 160 bpm</span>
+        <span class="pace-feel">Comfortably hard. Where Saturday's closing surge lives.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Zone 4</span>
+        <span class="pace-value">160 – 180 bpm</span>
+        <span class="pace-feel">Short phrases only. Wednesday's threshold zone.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Zone 5</span>
+        <span class="pace-value">180 – 200 bpm</span>
+        <span class="pace-feel">All-out. Race territory — not trained directly in Phase 0.</span>
+      </div>
+    </div>
+    <p class="table-note">Based on a tested max HR of 200bpm (BAA 10K 2026). Standard %-of-max-HR zones — a lactate threshold test would sharpen these further, but this is more than enough to train off for now.</p>
+
+    <h3>Pace Reference — Today's Output</h3>
+    <div class="paces">
+      <div class="pace-row">
+        <span class="pace-name">Easy / Z2</span>
+        <span class="pace-value">~7:20 /km</span>
+        <span class="pace-feel">Current output at 120–140bpm. Expect it to quicken as the base builds.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Long Run (base)</span>
+        <span class="pace-value">~7:20 /km</span>
+        <span class="pace-feel">Same as easy. Zone 2, no exceptions, no matter how good it feels.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Long Run (surge)</span>
         <span class="pace-value">5:40 – 6:00 /km</span>
-        <span class="pace-feel">Same as easy. Resist the urge to go faster.</span>
+        <span class="pace-feel">Zone 3/low-Zone 4. Roughly today's half-marathon effort.</span>
       </div>
       <div class="pace-row">
         <span class="pace-name">Threshold</span>
         <span class="pace-value">4:45 – 4:54 /km</span>
-        <span class="pace-feel">Comfortably uncomfortable. Z4. Short phrases only.</span>
+        <span class="pace-feel">Zone 4. Based on the 22:40 5K — due a retest given the new mile time.</span>
       </div>
       <div class="pace-row">
         <span class="pace-name">5K Race</span>
         <span class="pace-value">4:32 /km</span>
         <span class="pace-feel">Reference point — current PR pace.</span>
+      </div>
+      <div class="pace-row">
+        <span class="pace-name">Mile Race</span>
+        <span class="pace-value">3:55 /km</span>
+        <span class="pace-feel">New PR. Predicts something faster than 22:40 for the 5K — worth testing.</span>
       </div>
       <div class="pace-row">
         <span class="pace-name">Marathon Goal</span>
@@ -697,63 +759,65 @@
   <!-- ============ THE RUNS ============ -->
   <section>
     <span class="section-tag">§ Three — The Runs</span>
-    <h2>Three runs, three <em>distinct purposes.</em></h2>
+    <h2>Three run types, <em>four sessions.</em></h2>
 
     <div class="run-card">
-      <div class="run-meta">Wednesday · Quality</div>
+      <div class="run-meta">Wednesday · Quality (swaps with Tuesday for weather)</div>
       <h3>Threshold Session</h3>
-      <p>Alternate weekly between continuous and cruise intervals. Always 1K easy warm-up first, optional 1K cool-down if time allows.</p>
+      <p>Alternate weekly between continuous and cruise intervals. Always 1K easy warm-up first, optional 1K cool-down if time allows. The one clean hard session of the week — protect it.</p>
       <ul>
         <li><strong>Format A</strong> Continuous: 1K WU → 20–25 min @ threshold (4:48/km) → done</li>
         <li><strong>Format B</strong> Cruise: 1K WU → 2 × 12 min @ 4:45/km, 2-min jog between</li>
         <li><strong>Format C</strong> Cruise: 1K WU → 3 × 8 min @ 4:45/km, 90s jog between</li>
-        <li><strong>Cue</strong> Should feel hard but sustainable. Z4 only. No Z5.</li>
+        <li><strong>Cue</strong> Zone 4, 160–180bpm. Hard but sustainable. No Zone 5.</li>
       </ul>
     </div>
 
     <div class="run-card easy">
-      <div class="run-meta">Friday · Aerobic</div>
+      <div class="run-meta">Tuesday &amp; Friday · Aerobic</div>
       <h3>Easy Run</h3>
-      <p>The most undervalued run of the week. Builds the mitochondrial base that makes threshold pace possible.</p>
+      <p>The run that actually builds the engine — and the one that got mistrained for years. Governed by heart rate, full stop.</p>
       <ul>
-        <li><strong>Volume</strong> 5–10 km, building gradually within the cycle</li>
-        <li><strong>Pace</strong> 5:40–6:00/km. Slower is fine. Faster is not.</li>
-        <li><strong>HR</strong> Stay in Zone 2. If breathing climbs, slow down.</li>
-        <li><strong>After</strong> Strength Session B, same day</li>
+        <li><strong>Volume</strong> 5–8 km, building gradually within the cycle</li>
+        <li><strong>HR</strong> Zone 2, 120–140bpm. Non-negotiable ceiling.</li>
+        <li><strong>Pace</strong> Whatever Zone 2 produces — around 7:20/km today. Ignore the number, trust the zone.</li>
+        <li><strong>Swap</strong> Tuesday can trade with Wednesday if weather forces it</li>
       </ul>
     </div>
 
     <div class="run-card easy">
-      <div class="run-meta">Sunday · Long</div>
+      <div class="run-meta">Saturday · Long</div>
       <h3>Long Run</h3>
-      <p>The single most important running adaptation in Phase 0. Extend by ~1K every 2–3 weeks during build weeks.</p>
+      <p>Still the single most important adaptation in Phase 0 — now with a small, earned dose of race effort at the end.</p>
       <ul>
-        <li><strong>Volume</strong> 10–20 km, progressing across the cycle</li>
-        <li><strong>Pace</strong> Conversational throughout. ~5:40–6:00/km.</li>
-        <li><strong>Goal</strong> Time on feet. Don't race it. Don't end it tired.</li>
-        <li><strong>Future</strong> Will progress to 28–32K before marathon-specific work begins</li>
+        <li><strong>Volume</strong> 8–15 km to start, progressing slowly across cycles</li>
+        <li><strong>Base</strong> First ~80% at Zone 2, ~7:20/km. Conversational, no exceptions.</li>
+        <li><strong>Surge</strong> Last 15–20% at Zone 3/low-Zone 4, ~5:40–6:00/km — today's half-marathon effort</li>
+        <li><strong>Progression</strong> Grow surge duration and intensity one at a time, never both together</li>
+        <li><strong>Ceiling</strong> Once long runs pass ~25K, the surge stops growing past ~5–6K — full stop</li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ STRENGTH A ============ -->
+  <!-- ============ STRENGTH ============ -->
   <section>
     <span class="section-tag">§ Four — Strength</span>
     <h2>Two sessions, <em>different jobs.</em></h2>
-    <p class="lead">Tuesday is for the plantar fascia and the small stabilizers. Friday is for general posterior chain and movement quality. Both end in calf raises, because the foot is the foundation of everything.</p>
+    <p class="lead">Monday is fresh-legs general strength — squats, split squats, core. Thursday morning is short PF prehab ahead of an office day — calf raises and band work, kept deliberately light. Both end in calf raises, because the foot is still the foundation of everything. Everything here runs on bodyweight, resistance bands, and a water jug — no gym required.</p>
 
     <div class="lift-session">
       <div class="lift-header">
-        <h3>Session A — Plantar Fascia &amp; Stability</h3>
-        <span class="lift-day">Tuesday</span>
+        <h3>Session A — PF Prehab &amp; Stability</h3>
+        <span class="lift-day">Thursday · AM</span>
       </div>
+      <p class="lift-intro">Short and light on purpose — this sits the morning of an office day. Bodyweight and bands only, ~15–20 minutes total.</p>
 
       <div class="exercise">
         <div class="ex-top">
           <span class="ex-name">Heavy Slow Calf Raise — Toes Extended <em style="font-style:italic; font-weight:400; color: var(--accent);">★ priority</em></span>
           <span class="ex-prescription">3 × 12 · every other day</span>
         </div>
-        <p class="ex-notes">The Rathleff protocol. Stand on a step with a rolled towel under your toes (this is the key — toes must be dorsiflexed). Rise up over 3 seconds, pause 2 seconds at top, lower over 3 seconds. Single leg if possible. Add weight (backpack, then dumbbells) as it gets easier. This is <em>the</em> exercise.</p>
+        <p class="ex-notes">The Rathleff protocol. Stand on a step with a rolled towel under your toes (this is the key — toes must be dorsiflexed). Rise up over 3 seconds, pause 2 seconds at top, lower over 3 seconds. Single leg if possible. Bodyweight on a step to start; once that's easy, hold a water jug for load. This is <em>the</em> exercise.</p>
         <a class="ex-link" href="https://www.youtube.com/results?search_query=rathleff+plantar+fasciitis+heavy+slow+calf+raise" target="_blank" rel="noopener">Watch demonstration</a>
       </div>
 
@@ -762,17 +826,17 @@
           <span class="ex-name">Single-Leg Romanian Deadlift</span>
           <span class="ex-prescription">3 × 8 each leg</span>
         </div>
-        <p class="ex-notes">Hinge at the hip on one leg, opposite leg extending behind for balance. Bodyweight first, then add a light dumbbell in the opposite hand. Builds posterior chain and proprioception — every running stride is a unilateral load.</p>
+        <p class="ex-notes">Hinge at the hip on one leg, opposite leg extending behind for balance. Bodyweight first, then a light water jug in the opposite hand once balance is solid. Builds posterior chain and proprioception — every running stride is a unilateral load.</p>
         <a class="ex-link" href="https://www.youtube.com/results?search_query=single+leg+romanian+deadlift+form" target="_blank" rel="noopener">Watch demonstration</a>
       </div>
 
       <div class="exercise">
         <div class="ex-top">
-          <span class="ex-name">Side-Lying Leg Raise</span>
-          <span class="ex-prescription">3 × 15 each side</span>
+          <span class="ex-name">Mini-Band Crab Walk</span>
+          <span class="ex-prescription">2–3 × 15 steps each direction</span>
         </div>
-        <p class="ex-notes">Glute medius activation. Lie on your side, lift the top leg slowly, lower under control. Weak hips let the knee collapse inward, which loads the medial foot — upstream cause of PF.</p>
-        <a class="ex-link" href="https://www.youtube.com/results?search_query=side+lying+leg+raise+glute+medius+runners" target="_blank" rel="noopener">Watch demonstration</a>
+        <p class="ex-notes">Small loop band just above the knees, athletic stance, step sideways while keeping tension on the band the whole time. Direct glute-med activation. Weak hips let the knee collapse inward, which loads the medial foot — an upstream cause of PF.</p>
+        <a class="ex-link" href="https://www.youtube.com/results?search_query=mini+band+crab+walk+glute+activation" target="_blank" rel="noopener">Watch demonstration</a>
       </div>
 
       <div class="exercise">
@@ -788,15 +852,16 @@
     <div class="lift-session">
       <div class="lift-header">
         <h3>Session B — General Strength</h3>
-        <span class="lift-day">Friday · post-run</span>
+        <span class="lift-day">Monday</span>
       </div>
+      <p class="lift-intro">Fresh legs, full gear list: bodyweight, resistance bands, and a water jug (or two, once one feels light).</p>
 
       <div class="exercise">
         <div class="ex-top">
           <span class="ex-name">Goblet Squat</span>
           <span class="ex-prescription">3 × 10</span>
         </div>
-        <p class="ex-notes">Hold a dumbbell or kettlebell at your chest. Squat to comfortable depth, knees tracking over toes. Builds quads, glutes, and core in a runner-friendly pattern. Start with bodyweight if needed.</p>
+        <p class="ex-notes">Hold a full water jug at your chest (a gallon runs about 8 lbs / 3.8 kg — plenty to start). Squat to comfortable depth, knees tracking over toes. Builds quads, glutes, and core in a runner-friendly pattern. Bodyweight only if the jug's still too much.</p>
         <a class="ex-link" href="https://www.youtube.com/results?search_query=goblet+squat+form+beginner" target="_blank" rel="noopener">Watch demonstration</a>
       </div>
 
@@ -805,7 +870,7 @@
           <span class="ex-name">Bulgarian Split Squat</span>
           <span class="ex-prescription">3 × 8 each leg</span>
         </div>
-        <p class="ex-notes">Rear foot elevated on a bench or step, front foot forward. Lower the back knee toward the floor, drive up through the front foot. The single most translatable strength exercise for distance running.</p>
+        <p class="ex-notes">Rear foot elevated on a sturdy chair or step, front foot forward. Lower the back knee toward the floor, drive up through the front foot. Bodyweight first, add the jug once that's easy. The single most translatable strength exercise for distance running.</p>
         <a class="ex-link" href="https://www.youtube.com/results?search_query=bulgarian+split+squat+form" target="_blank" rel="noopener">Watch demonstration</a>
       </div>
 
@@ -814,7 +879,7 @@
           <span class="ex-name">Heavy Slow Calf Raise (round 2)</span>
           <span class="ex-prescription">3 × 12</span>
         </div>
-        <p class="ex-notes">Same as Tuesday — toes extended on a step, 3 sec up, 2 sec pause, 3 sec down. Two sessions per week is the proven cadence for tendon/fascia adaptation.</p>
+        <p class="ex-notes">Same as Thursday — toes extended on a step, 3 sec up, 2 sec pause, 3 sec down. Two sessions per week is the proven cadence for tendon/fascia adaptation.</p>
         <a class="ex-link" href="https://www.youtube.com/results?search_query=rathleff+plantar+fasciitis+heavy+slow+calf+raise" target="_blank" rel="noopener">Watch demonstration</a>
       </div>
 
@@ -823,7 +888,7 @@
           <span class="ex-name">Banded Lateral Walk</span>
           <span class="ex-prescription">2 × 15 each direction</span>
         </div>
-        <p class="ex-notes">Resistance band around ankles or above knees, athletic stance, side-step against the band's resistance. Hits glute med directly. A fatigued, jelly-like burn at the side of the hip is the goal.</p>
+        <p class="ex-notes">Long loop resistance band around your ankles or above the knees, athletic stance, side-step against the band's resistance. Hits glute med directly. A fatigued, jelly-like burn at the side of the hip is the goal.</p>
         <a class="ex-link" href="https://www.youtube.com/results?search_query=banded+lateral+walk+glute+medius" target="_blank" rel="noopener">Watch demonstration</a>
       </div>
 
@@ -888,20 +953,20 @@
       <div class="meso-week">
         <div class="meso-num">01</div>
         <div class="meso-name">Build</div>
-        <div class="meso-desc">Lower end of distance ranges. Easy 5K, long 10K, quality 4K total.</div>
+        <div class="meso-desc">Lower end. Easy 6K × 2, threshold ~6K total, long 10K. ~28K on the week — right around recent peak, just organized.</div>
       </div>
       <div class="meso-week">
         <div class="meso-num">02</div>
         <div class="meso-name">Build</div>
-        <div class="meso-desc">Push toward upper end. Easy 8K, long 15K, quality 5–6K total.</div>
+        <div class="meso-desc">Nudge up. Easy 7K × 2, threshold ~6–7K total, long 11–12K. ~30K on the week — a controlled step, not a leap.</div>
       </div>
       <div class="meso-week deload">
         <div class="meso-num">03</div>
         <div class="meso-name">Deload</div>
-        <div class="meso-desc">Pull back ~30%. Easy 5K, long 10K, quality kept short and sharp. Strength volume halved.</div>
+        <div class="meso-desc">Pull back hard. Three easy 5K runs, no threshold, no long run. Monday's general strength skipped — Thursday's PF prehab stays, light.</div>
       </div>
     </div>
-    <p>Then repeat — and each new cycle nudges the upper bound a little further than the last. Slowly. Long-run ceiling moves from 20K → 25K → 28K over months, not weeks.</p>
+    <p>Then repeat — each new cycle nudges the ceiling a little further than the last. Long run toward the mid-teens (km), easy runs toward 8K, before Phase 1 build work is even on the table. Months, not weeks.</p>
   </section>
 
   <!-- ============ PRINCIPLES ============ -->
@@ -912,32 +977,32 @@
     <div class="principle">
       <div class="principle-num">i</div>
       <div class="principle-text">
-        Easy means easy.
-        <small>If you can't speak in full sentences on Friday or Sunday, you're running too hard. The aerobic base is built at paces that feel almost too slow.</small>
+        Zone 2 means Zone 2. Not a pace.
+        <small>The old pace-based "easy" zone was actually half-marathon effort in disguise. Let heart rate set the pace, every time — even when that means 7:20/km today.</small>
       </div>
     </div>
 
     <div class="principle">
       <div class="principle-num">ii</div>
       <div class="principle-text">
-        One quality session per week. No more.
-        <small>The threshold run is the engine. Adding a second hard session on three days/week is how runners with PF history get hurt.</small>
+        The surge is earned, not assumed.
+        <small>Saturday's closing effort grows by duration and intensity, one at a time — never both together. A controlled second stimulus, not a second hard day smuggled into an easy week.</small>
       </div>
     </div>
 
     <div class="principle">
       <div class="principle-num">iii</div>
       <div class="principle-text">
-        Lift fresh, run threshold next day.
-        <small>Tuesday strength → Wednesday quality. Never the other way. Heavy load on fatigued tissue is where injuries live.</small>
+        Never lift straight into a hard day.
+        <small>Monday's strength sits behind Tuesday's easy run and two full days ahead of Wednesday's threshold. Thursday's prehab is deliberately light — it leads into Friday's easy run, not a quality day.</small>
       </div>
     </div>
 
     <div class="principle">
       <div class="principle-num">iv</div>
       <div class="principle-text">
-        Saturday is sacred.
-        <small>Full rest between Friday strength and Sunday long. This single off-day protects the long run more than any extra mileage would build it.</small>
+        The weekend rest block is non-negotiable.
+        <small>Full rest Sunday, into Monday's lighter lifting day. This is what actually lets Saturday's long run — and its surge — get absorbed before the next loading day.</small>
       </div>
     </div>
 
@@ -945,7 +1010,7 @@
       <div class="principle-num">v</div>
       <div class="principle-text">
         Load before complexity.
-        <small>Don't collect new exercises. Add weight to the ones you already do. Bodyweight squat → goblet squat → loaded goblet squat.</small>
+        <small>Don't collect new exercises. Add weight to the ones you already do — bodyweight, then bands, then a water jug, then two.</small>
       </div>
     </div>
 
@@ -953,13 +1018,21 @@
       <div class="principle-num">vi</div>
       <div class="principle-text">
         Consistency beats heroic.
-        <small>Twelve months of three good runs per week beats six weeks of five before another PF flare. The marathon rewards the patient.</small>
+        <small>Twelve months of four good sessions a week beats six weeks of seven before the next flare-up. The marathon rewards the patient.</small>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">vii</div>
+      <div class="principle-text">
+        Progress is the same effort getting faster — not more distance covered.
+        <small>Track 7:20/km at 120–140bpm over the coming months. When that pace drops at the same heart rate, that's the aerobic base actually being built — the one number in this whole plan that matters most right now.</small>
       </div>
     </div>
   </section>
 
   <footer>
-    <span>Phase 0 · v1</span>
+    <span>Phase 0 · v2</span>
     <span>Built for the long view</span>
   </footer>
 
